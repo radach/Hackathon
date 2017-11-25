@@ -44,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 String password_value = password_input.getText().toString();
 
                 User user = connect(v);
-
                 intent_menu.putExtra("user", user);
 
                 startActivity(intent_menu);
+                finish();
 
             }
         });
