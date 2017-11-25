@@ -9,8 +9,17 @@ public class Transport implements Serializable {
     boolean login;
     String resullt;
     BreackTime workBreak;
+    Auction auction;
 
     public  Transport(){}
+
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
+    }
 
     public BreackTime getWorkBreak() {
         return workBreak;

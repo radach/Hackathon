@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtra("email", email_value);
                 intent.putExtra("password",password_value);
+                intent.putExtra("teste", conn);
 
                 connect(v);
                 startActivity(intent);

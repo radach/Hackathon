@@ -65,6 +65,7 @@ public class Control extends Thread {
                     out.writeObject(login(tran));
                     break;
                 case 2:
+                    System.out.println("criar ");
                     out.writeObject(creatBreack(tran));
                     break;
                 default:
@@ -100,6 +101,7 @@ public class Control extends Thread {
 
         return db.logUser(tran,userList);
     }
+
 
 
 }

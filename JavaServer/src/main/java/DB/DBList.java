@@ -1,5 +1,6 @@
 package DB;
 
+import AuxClass.Auction;
 import AuxClass.BreackTime;
 import AuxClass.Transport;
 import AuxClass.User;
@@ -40,5 +41,13 @@ public class DBList implements DBControl {
 
         return tran;
     }
-    //public abstract void CreatUser(Transport tran, ArrayList<User> userList);
+
+    @Override
+    public Transport creatAuction(Transport tran, Object auctionList){
+        ArrayList<Auction> auctions = (ArrayList<Auction>) auctionList;
+        auctions.add(tran.getAuction());
+        tran.setResullt("true:auction created");
+        return tran;
+    }
+    
 }
