@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -18,20 +16,20 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        final Button motivar_button = findViewById(R.id.motivar_button);
+        //final Button motivar_button = findViewById(R.id.motivar_button);
         final Button logout_button = findViewById(R.id.logout_button);
-        final Button historico_button = findViewById(R.id.historico_button);
+        //final Button historico_button = findViewById(R.id.historico_button);
         final Button ver_breaktimes_favores_button = findViewById(R.id.ver_breaktimes_favores_button);
         final Button pedir_favor_button = findViewById(R.id.pedir_favor_button);
         final Button breaktime_button = findViewById(R.id.breaktime_button);
 
 
-        final Intent breaktime_intent = new Intent(this, Breaktime.class);
+        final Intent breaktime_intent = new Intent(this, BreaktimeActivity.class);
         final Intent perfil_intent = new Intent(this, PerfilActivity.class);
         final Intent pedir_favor_intent = new Intent(this, PedirFavorActivity.class);
         final Intent ver_breaktime_favores_intent = new Intent(this, BreaktimesAndFavorsActivity.class);
-        final Intent motivar_intent = new Intent(this, MotivarActivity.class);
-        final Intent historico_intent = new Intent(this, HistoricoActivity.class);
+        //final Intent motivar_intent = new Intent(this, MotivarActivity.class);
+        //final Intent historico_intent = new Intent(this, HistoricoActivity.class);
         final Intent logout_intent = new Intent(this, MainActivity.class);
 
         VerPerfil = (ImageView) this.findViewById(R.id.ver_perfil);
@@ -62,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        motivar_button.setOnClickListener(new View.OnClickListener() {
+        /*motivar_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 startActivity(motivar_intent);
@@ -76,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(historico_intent);
 
             }
-        });
+        });*/
 
         logout_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

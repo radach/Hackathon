@@ -5,4 +5,9 @@
     <string name="bi_challange">BI_CHALLANGE</string>
     <string name="password">Password</string>
     <string name="login">LOGIN</string>
+    <string name="breaktime_options">Tipo de Breaktime</string>
+    <string name="timeout_options">Tempo de espera por respostas</string>
+    <string name="favor_description_text">Descriçao do favor</string>
+    <string name="submit">Submeter</string>
+    <string name="back">Voltar</string>
 </resources>
