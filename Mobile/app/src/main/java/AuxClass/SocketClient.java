@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 
-public class SocketClient implements Serializable{
+public class SocketClient implements Serializable {
     private static final long serialVersionUID = -6470090944414208496L;
 
     Socket sok;
@@ -15,8 +15,6 @@ public class SocketClient implements Serializable{
     public SocketClient() {
 
     }
-
-
 
     public void connect() throws IOException {
         //Your connection code will come here

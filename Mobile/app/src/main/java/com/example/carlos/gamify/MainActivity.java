@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         
         final Button button = findViewById(R.id.login_button);
-
         final Intent intent = new Intent(this, HomeActivity.class);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -50,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
                 String email_value = email_input.getText().toString();
                 String password_value = password_input.getText().toString();
 
-                intent.putExtra("email", email_value);
-                intent.putExtra("password",password_value);
-                intent.putExtra("teste", conn);
+                User user = connect(v);
 
-                connect(v);
+                intent.putExtra("userId", user);
+                intent.putExtra("connection", conn);
+
                 startActivity(intent);
 
             }
@@ -64,10 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void connect(View view) {
-
-
-
+    public User connect(View view) {
         Transport trans = new Transport();
         User us = new User();
         us.setUsername("rsantos");
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d("RETURN"," "+trans.getLogin());
 
-
+        return trans.getUser();
     }
 
 }
