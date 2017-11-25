@@ -28,9 +28,10 @@ public class PerfilActivity extends AppCompatActivity {
         String andar = "4º";
 
         final Intent edit_perfil_intent = new Intent(this, EditPerfilActivity.class);
+        edit_perfil_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         final Intent back_intent = new Intent(this, HomeActivity.class);
-
+        back_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
 
         TextView nome_layout =  (TextView) findViewById(R.id.Nome_utilizador_perfil);

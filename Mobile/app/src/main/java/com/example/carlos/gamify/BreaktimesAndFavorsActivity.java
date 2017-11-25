@@ -46,6 +46,8 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
         populateBreaktimesLists();
         breaktime_adapter.notifyDataSetChanged();
 
+        final Intent bdetails_intent = new Intent(this, BreaktimeDetail.class);
+        bdetails_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         lview_breaktimes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -58,6 +60,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Title : " + title +"\n"
                                 +"Timeout: " + timeout, Toast.LENGTH_SHORT).show();
+                startActivity(bdetails_intent);
             }
         });
 
@@ -70,6 +73,8 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
 
         favor_adapter.notifyDataSetChanged();
 
+        final Intent fdetails_intent = new Intent(this, FavoresDetail.class);
+        fdetails_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         lview_favors.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -84,10 +89,12 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
                         "Title : " + title +"\n"
                                 +"Timeout: " + timeout + "\n"
                                 +"Lowest Bid: " + lowest_bid, Toast.LENGTH_SHORT).show();
+                startActivity(fdetails_intent);
             }
         });
 
         final Intent back_intent = new Intent(this, HomeActivity.class);
+        back_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity

@@ -48,6 +48,7 @@ public class BreaktimeActivity extends AppCompatActivity {
 
         final Intent intent_back = new Intent(this, HomeActivity.class);
         intent_back.putExtra("user", user);
+        intent_back.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         back_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intent_back);
@@ -56,6 +57,7 @@ public class BreaktimeActivity extends AppCompatActivity {
 
         final Intent intent_submit = new Intent(this, HomeActivity.class);
         intent_submit.putExtra("user", user);
+        intent_submit.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         submit_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
