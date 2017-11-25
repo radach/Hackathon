@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeActivity" />
-        <activity android:name=".Breaktime" />
+        <activity android:name=".BreaktimeActivity" />
         <activity android:name=".PerfilActivity" />
         <activity android:name=".PedirFavorActivity" />
         <activity android:name=".BreaktimesAndFavorsActivity" />
