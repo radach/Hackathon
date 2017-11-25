@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/home_layout">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/home_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:text="Home"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/breaktime_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Breaktime" />
+
+    <Button
+        android:id="@+id/pedir_favor_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/breaktime_button"
+        android:layout_below="@+id/breaktime_button"
+        android:layout_marginTop="25dp"
+        android:text="Pedir Favor" />
+
+    <Button
+        android:id="@+id/motivar_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/historico_button"
+        android:layout_alignStart="@+id/historico_button"
+        android:layout_marginBottom="60dp"
+        android:text="Motivar" />
+
+    <Button
+        android:id="@+id/historico_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/logout_button"
+        android:layout_alignEnd="@+id/breaktime_button"
+        android:layout_marginBottom="31dp"
+        android:text="Historico" />
+
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Logout" />
+
+    <ImageView
+        android:id="@+id/ver_perfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <Button
+        android:id="@+id/ver_breaktimes_favores_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pedir_favor_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="Break Times e Favores a decorrer" />
+
+</RelativeLayout>
