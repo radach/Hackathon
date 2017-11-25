@@ -67,7 +67,7 @@
         android:ems="10"
         android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/breaktime_options_text"
+        app:layout_constraintTop_toBottomOf="@+id/favor_description_text"
         tools:layout_editor_absoluteX="16dp" />
 
 </android.support.constraint.ConstraintLayout>
