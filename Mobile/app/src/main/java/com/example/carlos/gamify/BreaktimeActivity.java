@@ -90,7 +90,7 @@ public class BreaktimeActivity extends AppCompatActivity {
 
         BreackTime bt = new BreackTime();
         bt.setCreator(user);
-        bt.setTipo(breaktime);
+        bt.setType(breaktime);
         bt.setDelay(Integer.parseInt(timeout));
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
