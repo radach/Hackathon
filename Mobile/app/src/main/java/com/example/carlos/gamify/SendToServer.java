@@ -29,13 +29,11 @@ public class SendToServer extends AsyncTask<Object,Void, Transport> {
             //sok = new Socket("192.168.10.170",6001);//10.0.2.2 is the localhost ip interface
 
         sok = (SocketClient) trans[1];
-
-        Transport aux= (Transport)trans[0];
+        Transport aux = (Transport)trans[0];
 
         try {
-            Log.d("Teste","TENTAR ESCREVER "+aux.getUser().getUsername());
-            trans[0]=(Transport) sok.sendMessage((Transport) trans[0]);
-
+            Log.d("Teste","TENTAR ESCREVER " + aux.getUser().getUsername());
+            aux = (Transport) sok.sendMessage((Transport) trans[0]);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

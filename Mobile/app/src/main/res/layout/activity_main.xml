@@ -14,8 +14,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="56dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
         android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:text="rsantos"
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="113dp" />
 
@@ -42,6 +43,7 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:text="rsantos"
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="199dp" />
 

@@ -3,9 +3,11 @@ package AuxClass;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 
-public class SocketClient {
+public class SocketClient implements Serializable {
+    private static final long serialVersionUID = -6470090944414208496L;
 
     Socket sok;
     ObjectInputStream in;
@@ -13,8 +15,6 @@ public class SocketClient {
     public SocketClient() {
 
     }
-
-
 
     public void connect() throws IOException {
         //Your connection code will come here
