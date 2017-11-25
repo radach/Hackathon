@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="breaktime_options">
-        <item>Opcao1</item>
-        <item>Opcao2</item>
-        <item>Opcao3</item>
-        <item>Opcao4</item>
-        <item>Opcao5</item>
+        <item>Tomar Café</item>
+        <item>Jogar Matrecos</item>
+        <item>Fumar um cigarro</item>
     </string-array>
 
     <string-array name="timeout_options">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <item>1 minuto</item>
+        <item>2 minutos</item>
+        <item>3 minutos</item>
+        <item>4 minutos</item>
+        <item>5 minutos</item>
     </string-array>
 
     <string-array name="andares">
