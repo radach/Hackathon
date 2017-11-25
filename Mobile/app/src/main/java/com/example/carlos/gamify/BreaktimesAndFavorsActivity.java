@@ -92,6 +92,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
         }
 
         Transport trans = new Transport();
+        trans.setBreackTimes(new ArrayList<BreackTime>());
         trans.setOpc(4);
         try {
             trans = new SendToServer().execute(trans, conn).get();

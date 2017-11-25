@@ -32,7 +32,7 @@ public class SendToServer extends AsyncTask<Object,Void, Transport> {
         Transport aux = (Transport)trans[0];
 
         try {
-            Log.d("Teste","TENTAR ESCREVER " + aux.getUser().getUsername());
+            //Log.d("Teste","TENTAR ESCREVER " + aux.getUser().getUsername());
             aux = (Transport) sok.sendMessage((Transport) trans[0]);
         } catch (IOException e) {
             e.printStackTrace();
