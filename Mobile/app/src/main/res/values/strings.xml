@@ -10,4 +10,6 @@
     <string name="favor_description_text">Descriçao do favor</string>
     <string name="submit">Submeter</string>
     <string name="back">Voltar</string>
+    <string name="score_to_pay">Pontuação a "pagar", no máximo</string>
+    <string name="score_string">Pontuação: </string>
 </resources>
