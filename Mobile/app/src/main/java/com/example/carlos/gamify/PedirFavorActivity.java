@@ -23,6 +23,8 @@ public class PedirFavorActivity extends AppCompatActivity {
 
         final EditText favor_description = (EditText) findViewById(R.id.favor_description);
 
+        final EditText credits = (EditText) findViewById(R.id.max_credits);
+
         final Spinner spinner_timeout = (Spinner) findViewById(R.id.spinner_favor_timeout);
 
         ArrayAdapter<CharSequence> timeout_adapter = ArrayAdapter.createFromResource(this,
@@ -50,7 +52,9 @@ public class PedirFavorActivity extends AppCompatActivity {
 
                 String aux2 = spinner_timeout.getSelectedItem().toString();
 
-                Toast.makeText(PedirFavorActivity.this, aux, Toast.LENGTH_SHORT).show();
+                String aux3 = credits.getText().toString();
+
+                Toast.makeText(PedirFavorActivity.this, aux3, Toast.LENGTH_SHORT).show();
 
                 //Toast.makeText(BreaktimeActivity.this, aux2, Toast.LENGTH_LONG).show();
                 //startActivity(intent);
