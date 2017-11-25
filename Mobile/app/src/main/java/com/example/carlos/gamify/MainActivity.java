@@ -21,9 +21,8 @@ import AuxClass.Transport;
 import AuxClass.User;
 
 public class MainActivity extends AppCompatActivity {
-    Socket sok;
+    //Socket sok;
     SocketClient conn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void connect(View view) {
+
+
+
         Transport trans = new Transport();
         User us = new User();
         us.setUsername("rsantos");

@@ -1,21 +1,32 @@
+import AuxClass.BreackTime;
 import AuxClass.Transport;
+import AuxClass.User;
+import DB.DBList;
 
+import javax.naming.NamingException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Control extends Thread {
     Socket client;
     ObjectInputStream in;
     ObjectOutputStream out;
-
+    ArrayList<User> userList;
+    ArrayList<BreackTime> breakTime;
     String username;
+    DBList db;
 
 
 
-    public  Control(Socket cli){
+    public  Control(Socket cli, ArrayList <User> userList, ArrayList<BreackTime> breakTime) throws SQLException, NamingException, ClassNotFoundException {
         this.client=cli;
+        this.userList=userList;
+        this.breakTime=breakTime;
+        db=new DBList();
     }
 
     public void run(){
@@ -45,7 +56,7 @@ public class Control extends Thread {
 
     private void menu() throws IOException, ClassNotFoundException {
         Transport tran;
-
+        creatUsers();
         while (true){
             tran= (Transport) in.readObject();
             switch (tran.getOpc()){
@@ -53,28 +64,41 @@ public class Control extends Thread {
                     System.out.println("antes login" + tran.getOpc()+" " +tran.getUser().getUsername());
                     out.writeObject(login(tran));
                     break;
+                case 2:
+                    out.writeObject(creatBreack(tran));
+                    break;
                 default:
                     System.out.println("Bora tirar cafés");
                     break;
             }
         }
-
-
-
-
     }
+
+    private Transport creatBreack(Transport tran) {
+
+        return tran;
+    }
+
+    private void creatUsers() {
+        User us1=new User();
+        us1.setPiso(4);
+        us1.setId(1);
+        us1.setUsername("rsantos");
+        us1.setPass("rsantos");
+        us1.setBalanceFun(500);
+        us1.setBalanceWork(500);
+        us1.setName("rsantos");
+        us1.setBio("cenas");
+        userList.add(us1);
+    }
+
+
+
+
 
     private Transport login(Transport tran) {
 
-        if (tran.getUser().getUsername().equals("rsantos") && tran.getUser().getPass().equals("rsantos")) {
-            tran.setLogin(true);
-            username=tran.getUser().getUsername();
-            System.out.println("user Login");
-
-        }
-        else
-            tran.setLogin(false);
-        return tran;
+        return db.logUser(tran,userList);
     }
 
 

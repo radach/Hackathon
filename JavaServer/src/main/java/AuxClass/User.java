@@ -8,16 +8,40 @@ public class User  implements Serializable{
     String username;
     String name;
     String pass;
+    String bio;
     int piso;
-    long balance;
+    int balanceWork;
+    int balanceFun;
 
-    public long getBalance() {
-        return balance;
+
+
+
+    public String getBio() {
+        return bio;
     }
 
-    public void setBalance(long balance) {
-        this.balance = balance;
+    public void setBio(String bio) {
+        this.bio = bio;
     }
+
+    public int getBalanceWork() {
+        return balanceWork;
+    }
+
+    public void setBalanceWork(int balanceWork) {
+        this.balanceWork = balanceWork;
+    }
+
+    public int getBalanceFun() {
+        return balanceFun;
+    }
+
+    public void setBalanceFun(int balanceFun) {
+        this.balanceFun = balanceFun;
+    }
+
+
+
 
     public int getId() {
         return id;

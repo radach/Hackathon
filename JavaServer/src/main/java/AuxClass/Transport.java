@@ -7,12 +7,26 @@ public class Transport implements Serializable {
     int opc;
     User user;
     boolean login;
-
-
+    String resullt;
+    BreackTime workBreak;
 
     public  Transport(){}
 
+    public BreackTime getWorkBreak() {
+        return workBreak;
+    }
 
+    public void setWorkBreak(BreackTime workBreak) {
+        this.workBreak = workBreak;
+    }
+
+    public String getResullt() {
+        return resullt;
+    }
+
+    public void setResullt(String resullt) {
+        this.resullt = resullt;
+    }
 
     public boolean getLogin() {
         return login;
