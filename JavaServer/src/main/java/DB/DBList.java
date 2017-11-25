@@ -49,5 +49,5 @@ public class DBList implements DBControl {
         tran.setResullt("true:auction created");
         return tran;
     }
-    
+
 }
