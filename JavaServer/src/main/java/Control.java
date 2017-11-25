@@ -76,7 +76,7 @@ public class Control extends Thread {
     }
 
     private Transport creatBreack(Transport tran) {
-
+        db.creatBreack(tran,breakTime);
         return tran;
     }
 

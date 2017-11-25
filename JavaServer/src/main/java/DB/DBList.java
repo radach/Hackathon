@@ -21,6 +21,7 @@ public class DBList implements DBControl {
             if (tran.getUser().getUsername().equals(newList.get(i).getUsername())&&tran.getUser().getPass().equals(newList.get(i).getPass())) {
                 System.out.println("user found");
                 tran.setUser(newList.get(i));
+                tran.setLogin(true);
                 tran.setResullt("true: Login");
                 return tran;
             }
@@ -34,10 +35,11 @@ public class DBList implements DBControl {
 
     @Override
     public Transport creatBreack(Transport tran, Object breakList) {
-
-        ArrayList<BreackTime> newList=(ArrayList<BreackTime>) breakList;
+        System.out.println("creat Break");
+        ArrayList<BreackTime> newList= (ArrayList<BreackTime>) breakList;
         newList.add(tran.getWorkBreak());
         tran.setResullt("true:break created");
+        System.out.println(newList.size());
 
         return tran;
     }

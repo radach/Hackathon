@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 User user = connect(v);
 
                 intent.putExtra("userId", user);
-                intent.putExtra("connection", conn);
+                //intent.putExtra("connection", conn);
 
                 startActivity(intent);
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        Log.d("RETURN"," "+trans.getLogin());
+        Log.d("RETURN"," "+trans.getResullt());
 
         return trans.getUser();
     }

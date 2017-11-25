@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import AuxClass.BreackTime;
 import AuxClass.SocketClient;
 import AuxClass.Transport;
 import AuxClass.User;
@@ -78,10 +79,10 @@ public class BreaktimeActivity extends AppCompatActivity {
         trans.setUser(user);
         trans.setOpc(2);
 
-        BreakTime bt = new BreakTime();
+        BreackTime bt = new BreackTime();
         bt.setCreator(user);
         bt.setType(breaktime);
-        bt.setDelay(timeout);
+        bt.setDelay(Integer.parseInt(timeout));
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
