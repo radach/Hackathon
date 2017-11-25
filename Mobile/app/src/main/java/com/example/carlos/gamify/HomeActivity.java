@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import AuxClass.SocketClient;
+import AuxClass.User;
+
 public class HomeActivity extends AppCompatActivity {
 
     private ImageView VerPerfil;
@@ -28,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Resources res = getResources();
         int user_score = 0;
+        User user = (User) getIntent().getSerializableExtra("user");
 
         //final Button motivar_button = findViewById(R.id.motivar_button);
         final Button logout_button = findViewById(R.id.logout_button);
@@ -38,9 +42,17 @@ public class HomeActivity extends AppCompatActivity {
         final Button button_testNotification = findViewById(R.id.button_notification);
 
         final Intent breaktime_intent = new Intent(this, BreaktimeActivity.class);
+        breaktime_intent.putExtra("user", user);
+
         final Intent perfil_intent = new Intent(this, PerfilActivity.class);
+        perfil_intent.putExtra("user", user);
+
         final Intent pedir_favor_intent = new Intent(this, PedirFavorActivity.class);
+        pedir_favor_intent.putExtra("user", user);
+
         final Intent ver_breaktime_favores_intent = new Intent(this, BreaktimesAndFavorsActivity.class);
+        ver_breaktime_favores_intent.putExtra("user", user);
+
         //final Intent motivar_intent = new Intent(this, MotivarActivity.class);
         //final Intent historico_intent = new Intent(this, HistoricoActivity.class);
         final Intent logout_intent = new Intent(this, MainActivity.class);
@@ -53,9 +65,7 @@ public class HomeActivity extends AppCompatActivity {
 
         breaktime_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 startActivity(breaktime_intent);
-
             }
         });
 

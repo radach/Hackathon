@@ -21,27 +21,19 @@ import AuxClass.Transport;
 import AuxClass.User;
 
 public class MainActivity extends AppCompatActivity {
-    Socket sok;
+    //Socket sok;
     SocketClient conn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
         final Button button = findViewById(R.id.login_button);
-
-        final Intent intent = new Intent(this, HomeActivity.class);
+        final Intent intent_menu = new Intent(this, HomeActivity.class);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
-        conn=new SocketClient();
-        try {
-            conn.connect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -51,20 +43,25 @@ public class MainActivity extends AppCompatActivity {
                 String email_value = email_input.getText().toString();
                 String password_value = password_input.getText().toString();
 
-                intent.putExtra("email", email_value);
-                intent.putExtra("password",password_value);
+                User user = connect(v);
 
-                connect(v);
-                startActivity(intent);
+                intent_menu.putExtra("user", user);
+
+                startActivity(intent_menu);
 
             }
         });
-
-
     }
 
 
-    public void connect(View view) {
+    public User connect(View view) {
+        conn=new SocketClient();
+        try {
+            conn.connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Transport trans = new Transport();
         User us = new User();
         us.setUsername("rsantos");
@@ -73,15 +70,19 @@ public class MainActivity extends AppCompatActivity {
         trans.setOpc(1);
         trans.setLogin(false);
         try {
-            trans=new SendToServer().execute(trans,conn).get();
+            trans = new SendToServer().execute(trans,conn).get();
+            conn.disconnect();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        Log.d("RETURN"," "+trans.getLogin());
 
+        Log.d("RETURN"," " + trans.getResullt());
 
+        return trans.getUser();
     }
 
 }
