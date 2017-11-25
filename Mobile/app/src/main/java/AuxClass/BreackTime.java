@@ -20,12 +20,12 @@ public class BreackTime implements Serializable {
         this.creator = creator;
     }
 
-    public String getTipo() {
+    public String getType() {
         return type;
     }
 
-    public void setTipo(String tipo) {
-        this.type = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getDelay() {
