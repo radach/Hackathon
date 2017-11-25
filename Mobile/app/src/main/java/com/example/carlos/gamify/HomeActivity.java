@@ -31,9 +31,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Resources res = getResources();
         int user_score = 0;
-
         User user = (User) getIntent().getSerializableExtra("user");
-        SocketClient conn = (SocketClient) getIntent().getSerializableExtra("connection");
 
         //final Button motivar_button = findViewById(R.id.motivar_button);
         final Button logout_button = findViewById(R.id.logout_button);
@@ -44,20 +42,16 @@ public class HomeActivity extends AppCompatActivity {
         final Button button_testNotification = findViewById(R.id.button_notification);
 
         final Intent breaktime_intent = new Intent(this, BreaktimeActivity.class);
-        breaktime_intent.putExtra("userId", user);
-        breaktime_intent.putExtra("connection", conn);
+        breaktime_intent.putExtra("user", user);
 
         final Intent perfil_intent = new Intent(this, PerfilActivity.class);
-        perfil_intent.putExtra("userId", user);
-        perfil_intent.putExtra("connection", conn);
+        perfil_intent.putExtra("user", user);
 
         final Intent pedir_favor_intent = new Intent(this, PedirFavorActivity.class);
-        pedir_favor_intent.putExtra("userId", user);
-        pedir_favor_intent.putExtra("connection", conn);
+        pedir_favor_intent.putExtra("user", user);
 
         final Intent ver_breaktime_favores_intent = new Intent(this, BreaktimesAndFavorsActivity.class);
-        ver_breaktime_favores_intent.putExtra("userId", user);
-        ver_breaktime_favores_intent.putExtra("connection", conn);
+        ver_breaktime_favores_intent.putExtra("user", user);
 
         //final Intent motivar_intent = new Intent(this, MotivarActivity.class);
         //final Intent historico_intent = new Intent(this, HistoricoActivity.class);
