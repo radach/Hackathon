@@ -9,11 +9,29 @@ public class Auction implements Serializable {
     String type;
     int delay;
     Date date;
+    User user;
+    int max;
 
 
 
     public Auction(){
 
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
 
     public String getType() {
