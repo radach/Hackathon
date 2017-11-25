@@ -1,46 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.carlos.gamify.BreaktimesAndFavorsActivity">
-
-    <Spinner
-        android:id="@+id/favors_spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/breaktime_spinner"
-        android:layout_marginTop="63dp" />
-
-    <Spinner
-        android:id="@+id/breaktime_spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/breaktime_text" />
-
+    tools:context="com.example.carlos.gamify.BreaktimesAndFavorsActivity"
+    android:orientation="vertical">
     <TextView
-        android:id="@+id/breaktime_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="22dp"
-        android:text="Breaktime"
+        android:id="@+id/breaktime_list_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:text="Placeholder"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/favors_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_weight="0.45"
+        android:layout_height="0dp"
+        android:id="@+id/breaktime_list"/>
 
-        android:layout_alignBottom="@+id/favors_spinner"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="23dp"
-        android:text="Favores"
+    <TextView
+        android:id="@+id/favors_list_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Placeholder"
+        android:layout_weight="0.05"
         android:textSize="18sp" />
 
-</RelativeLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_weight="0.45"
+        android:layout_height="0dp"
+        android:id="@+id/favor_list"/>
+</LinearLayout>

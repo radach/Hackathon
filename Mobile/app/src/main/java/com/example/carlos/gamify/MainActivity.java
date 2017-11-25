@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
                 connect(v);
                 startActivity(intent);
+                finish();
 
             }
         });
-
 
     }
 

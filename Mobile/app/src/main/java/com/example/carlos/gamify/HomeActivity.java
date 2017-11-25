@@ -55,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(breaktime_intent);
+                finish();
 
             }
         });
@@ -64,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(pedir_favor_intent);
+                finish();
 
             }
         });
@@ -72,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(ver_breaktime_favores_intent);
+                finish();
 
             }
         });
@@ -96,6 +99,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(logout_intent);
+                finish();
 
             }
         });
@@ -106,6 +110,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(perfil_intent);
+                finish();
             }
         });
 

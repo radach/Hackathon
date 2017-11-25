@@ -45,6 +45,7 @@ public class BreaktimeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(intent_back);
+                finish();
             }
         });
 

@@ -70,6 +70,7 @@ public class EditPerfilActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO: IMPLEMENT SAVE
                 startActivity(perfil_intent);
+                finish();
             }
         });
 
@@ -79,6 +80,7 @@ public class EditPerfilActivity extends AppCompatActivity {
             // Start new list activity
             public void onClick(View v) {
                 startActivity(intent);
+                finish();
             }
         });
     }

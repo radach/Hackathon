@@ -3,18 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/breaktime_row"
+    android:id="@+id/favor_row"
     android:orientation="horizontal">
     <TextView
-        android:id="@+id/breaktime_title"
+        android:id="@+id/favor_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.66"
-        android:text="teste" />
+        android:layout_weight="0.5" />
     <TextView
-        android:id="@+id/breaktime_timeout"
+        android:id="@+id/favor_timeout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.33"
-        android:text="teste"/>
+        android:layout_weight="0.25" />
+    <TextView
+        android:id="@+id/lowest_bid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25" />
 </LinearLayout>
