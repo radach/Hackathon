@@ -1,3 +1,4 @@
+import AuxClass.Auction;
 import AuxClass.BreackTime;
 import AuxClass.User;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class Main {
     ArrayList<User>userList;
     ArrayList<BreackTime>breakTime;
+    ArrayList<Auction>auctions;
     public static void main(String[]args){
 
         Main main = new Main();
@@ -35,14 +37,15 @@ public class Main {
         System.out.println("server listening to port "+6001);
         Socket sok;
         userList=new ArrayList<>();
-        breakTime= new ArrayList<BreackTime>();
+        breakTime= new ArrayList<>();
+        auctions = new ArrayList<>();
 
 
         while (true) {
 
             sok = serv.accept();
             System.out.println("new Client");
-            new Control(sok,userList, breakTime).start();
+            new Control(sok,userList, breakTime, auctions).start();
             //teste.start();
         }
     }

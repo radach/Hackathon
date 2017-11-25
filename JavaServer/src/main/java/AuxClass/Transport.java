@@ -1,6 +1,7 @@
 package AuxClass;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Transport implements Serializable {
     private static final long serialVersionUID = -6470090944414208496L;
@@ -10,8 +11,35 @@ public class Transport implements Serializable {
     String resullt;
     BreackTime workBreak;
     Auction auction;
+    ArrayList<User> users;
+    ArrayList<BreackTime> breackTimes;
+    ArrayList<Auction> auctions;
 
     public  Transport(){}
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
+    public ArrayList<BreackTime> getBreackTimes() {
+        return breackTimes;
+    }
+
+    public void setBreackTimes(ArrayList<BreackTime> breackTimes) {
+        this.breackTimes = breackTimes;
+    }
+
+    public ArrayList<Auction> getAuctions() {
+        return auctions;
+    }
+
+    public void setAuctions(ArrayList<Auction> auctions) {
+        this.auctions = auctions;
+    }
 
     public Auction getAuction() {
         return auction;
