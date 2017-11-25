@@ -3,7 +3,6 @@ package com.example.carlos.gamify;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +22,6 @@ import AuxClass.User;
 
 public class BreaktimeActivity extends AppCompatActivity {
     User user;
-    SocketClient conn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,6 @@ public class BreaktimeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_breaktime);
 
         user = (User) getIntent().getSerializableExtra("user");
-        conn = (SocketClient) getIntent().getSerializableExtra("connection");
 
         final Button submit_button = findViewById(R.id.breaktime_submit_button);
         final Button back_button = findViewById(R.id.breaktime_back_button);
@@ -51,11 +48,9 @@ public class BreaktimeActivity extends AppCompatActivity {
 
         final Intent intent_back = new Intent(this, HomeActivity.class);
         intent_back.putExtra("user", user);
-
         back_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intent_back);
-                finish();
             }
         });
 
@@ -67,7 +62,7 @@ public class BreaktimeActivity extends AppCompatActivity {
                 String breaktime = spinner_breaktime.getSelectedItem().toString();
                 String timeout = spinner_timeout.getSelectedItem().toString();
 
-                sendMessage(v, user, conn, breaktime, timeout);
+                sendMessage(v, user, breaktime, timeout);
 
                 Toast.makeText(BreaktimeActivity.this, timeout, Toast.LENGTH_SHORT).show();
 
@@ -77,8 +72,8 @@ public class BreaktimeActivity extends AppCompatActivity {
         });
     }
 
-    public void sendMessage(View v, User user, SocketClient conn, String breaktime, String timeout) {
-        conn = new SocketClient();
+    public void sendMessage(View v, User user, String breaktime, String timeout) {
+        SocketClient conn = new SocketClient();
         try {
             conn.connect();
         } catch (IOException e) {
@@ -87,7 +82,7 @@ public class BreaktimeActivity extends AppCompatActivity {
 
         Transport trans = new Transport();
         trans.setUser(user);
-        trans.setOpc(2);
+        trans.setOpc(2);    // breaktime
 
         BreackTime bt = new BreackTime();
         bt.setCreator(user);
@@ -111,6 +106,5 @@ public class BreaktimeActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -1,25 +1,41 @@
 package com.example.carlos.gamify;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+import AuxClass.Auction;
+import AuxClass.BreackTime;
+import AuxClass.SocketClient;
+import AuxClass.Transport;
+import AuxClass.User;
 
 public class BreaktimesAndFavorsActivity extends AppCompatActivity {
     private ArrayList<Breaktime> breaktimesList;
     private ArrayList<Favor> favorsList;
 
+    SocketClient conn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breaktimes_and_favors);
+
+        Button back_button = (Button) findViewById(R.id.break_favor_back_button);
+
 
         breaktimesList = new ArrayList<Breaktime>();
         favorsList = new ArrayList<Favor>();
@@ -27,7 +43,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
         BreaktimeListAdapter breaktime_adapter = new BreaktimeListAdapter(this, breaktimesList);
         lview_breaktimes.setAdapter(breaktime_adapter);
 
-        populateBreaktimesList();
+        populateBreaktimesLists();
         breaktime_adapter.notifyDataSetChanged();
 
         lview_breaktimes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,67 +86,73 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
                                 +"Lowest Bid: " + lowest_bid, Toast.LENGTH_SHORT).show();
             }
         });
+
+        final Intent back_intent = new Intent(this, HomeActivity.class);
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            // Start new list activity
+            public void onClick(View v) {
+                startActivity(back_intent);
+            }
+        });
     }
 
-    private void populateBreaktimesList() {
+    private void populateFavorsList(){
+        conn = new SocketClient();
+        try {
+            conn.connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Breaktime item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14;
+        Transport trans = new Transport();
+        trans.setOpc(4);
+        try {
+            trans = new SendToServer().execute(trans, conn).get();
+            conn.disconnect();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        item1 = new Breaktime("Cafe", 50, 50);
-        breaktimesList.add(item1);
-
-        item2 = new Breaktime("Cenas", 50, 50);
-        breaktimesList.add(item2);
-
-        item3 = new Breaktime("Whisky", 50, 50);
-        breaktimesList.add(item3);
-
-        item4 = new Breaktime("Cerveja", 50, 50);
-        breaktimesList.add(item4);
-
-        item5 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item5);
-
-        item6 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item6);
-        item7 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item7);
-        item8 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item8);
-        item9 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item9);
-        item10 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item10);
-        item11 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item11);
-        item12 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item12);
-        item13 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item13);
-        item14 = new Breaktime("Vinho", 50, 50);
-        breaktimesList.add(item14);
+        ArrayList<Auction> aux = trans.getAuctions();
+        Favor aux2;
+        for (int i=0; i<aux.size(); i++){
+            aux2 = new Favor(aux.get(i).getType(), aux.get(i).getDelay(), aux.get(i).getMax(),i);
+            favorsList.add(aux2);
+        }
     }
 
-    private void populateFavorsList() {
+    private void populateBreaktimesLists() {
+        conn = new SocketClient();
+        try {
+            conn.connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Favor item1, item2, item3, item4, item5;
+        Transport trans = new Transport();
+        trans.setOpc(4);
+        try {
+            trans = new SendToServer().execute(trans, conn).get();
+            conn.disconnect();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        item1 = new Favor("Cafe", 50, 50, 50);
-        favorsList.add(item1);
-
-        item2 = new Favor("Cenas", 50, 50, 50);
-        favorsList.add(item2);
-
-        item3 = new Favor("Whisky", 50, 50, 50);
-        favorsList.add(item3);
-
-        item4 = new Favor("Cerveja", 50, 50, 50);
-        favorsList.add(item4);
-
-        item5 = new Favor("Vinho", 50, 50, 50);
-        favorsList.add(item5);
-
+        ArrayList<BreackTime> aux = trans.getBreackTimes();
+        Breaktime aux2;
+        for (int i=0; i<aux.size(); i++){
+            aux2 = new Breaktime(aux.get(i).getType(), aux.get(i).getDelay(), i);
+            breaktimesList.add(aux2);
+        }
     }
-
 
 }

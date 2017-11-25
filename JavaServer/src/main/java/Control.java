@@ -1,3 +1,4 @@
+import AuxClass.Auction;
 import AuxClass.BreackTime;
 import AuxClass.Transport;
 import AuxClass.User;
@@ -17,15 +18,17 @@ public class Control extends Thread {
     ObjectOutputStream out;
     ArrayList<User> userList;
     ArrayList<BreackTime> breakTime;
+    ArrayList<Auction>auctions;
     String username;
     DBList db;
 
 
 
-    public  Control(Socket cli, ArrayList <User> userList, ArrayList<BreackTime> breakTime) throws SQLException, NamingException, ClassNotFoundException {
+    public  Control(Socket cli, ArrayList <User> userList, ArrayList<BreackTime> breakTime, ArrayList<Auction> auctions) throws SQLException, NamingException, ClassNotFoundException {
         this.client=cli;
         this.userList=userList;
         this.breakTime=breakTime;
+        this.auctions=auctions;
         db=new DBList();
     }
 
@@ -65,14 +68,34 @@ public class Control extends Thread {
                     out.writeObject(login(tran));
                     break;
                 case 2:
-                    System.out.println("criar ");
+                    System.out.println("criar break");
                     out.writeObject(creatBreack(tran));
+                    break;
+                case 3:
+                    System.out.println("criar auction");
+                    out.writeObject(creatAuction(tran));
+                    break;
+                case 4:
+                    System.out.println("dataBase Dump");
+                    out.writeObject(readDatabase(tran));
                     break;
                 default:
                     System.out.println("Bora tirar cafés");
                     break;
             }
         }
+    }
+
+    private Transport readDatabase(Transport tran) {
+        tran.setUsers(userList);
+        tran.setBreackTimes(breakTime);
+        tran.setAuctions(auctions);
+        return tran;
+    }
+
+    private Transport creatAuction(Transport tran) {
+        db.creatAuction(tran,auctions);
+        return tran;
     }
 
     private Transport creatBreack(Transport tran) {
