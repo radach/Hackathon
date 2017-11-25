@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         final Button breaktime_button = findViewById(R.id.breaktime_button);
 
 
-        final Intent breaktime_intent = new Intent(this, HomeActivity.class);
+        final Intent breaktime_intent = new Intent(this, Breaktime.class);
         final Intent perfil_intent = new Intent(this, PerfilActivity.class);
         final Intent pedir_favor_intent = new Intent(this, PedirFavorActivity.class);
         final Intent ver_breaktime_favores_intent = new Intent(this, BreaktimesAndFavorsActivity.class);
