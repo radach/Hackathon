@@ -101,7 +101,6 @@ public class HomeActivity extends AppCompatActivity {
         logout_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(logout_intent);
-                finish();
             }
         });
 
