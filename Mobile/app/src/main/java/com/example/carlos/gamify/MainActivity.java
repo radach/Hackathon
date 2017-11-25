@@ -16,10 +16,13 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.concurrent.ExecutionException;
 
+import AuxClass.SocketClient;
 import AuxClass.Transport;
 import AuxClass.User;
 
 public class MainActivity extends AppCompatActivity {
+    Socket sok;
+    SocketClient conn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,16 @@ public class MainActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.login_button);
 
         final Intent intent = new Intent(this, HomeActivity.class);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+        conn=new SocketClient();
+        try {
+            conn.connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -41,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("email", email_value);
                 intent.putExtra("password",password_value);
 
+                connect(v);
                 startActivity(intent);
 
             }
@@ -59,15 +73,15 @@ public class MainActivity extends AppCompatActivity {
         trans.setOpc(1);
         trans.setLogin(false);
         try {
-            trans=new SendToServer().execute(trans).get();
+            trans=new SendToServer().execute(trans,conn).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
         Log.d("RETURN"," "+trans.getLogin());
-        
-    }
 
+
+    }
 
 }

@@ -7,11 +7,15 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -21,6 +25,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Resources res = getResources();
+        int user_score = 0;
 
         //final Button motivar_button = findViewById(R.id.motivar_button);
         final Button logout_button = findViewById(R.id.logout_button);
@@ -37,6 +44,9 @@ public class HomeActivity extends AppCompatActivity {
         //final Intent motivar_intent = new Intent(this, MotivarActivity.class);
         //final Intent historico_intent = new Intent(this, HistoricoActivity.class);
         final Intent logout_intent = new Intent(this, MainActivity.class);
+
+        TextView score = (TextView) this.findViewById(R.id.score_text);
+        score.setText(res.getString(R.string.score_string) + " " + Integer.toString(user_score));
 
         VerPerfil = (ImageView) this.findViewById(R.id.ver_perfil);
 

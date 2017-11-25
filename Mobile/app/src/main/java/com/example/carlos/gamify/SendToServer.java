@@ -9,48 +9,40 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 //import AuxClass.AsyncResponse;
+import AuxClass.SocketClient;
 import AuxClass.Transport;
 
 /**
  * Created by rsantos on 11/25/17.
  */
 
-public class SendToServer extends AsyncTask<Transport,Void, Transport> {
-    Socket sok;
-    ObjectInputStream in;
-    ObjectOutputStream out;
+public class SendToServer extends AsyncTask<Object,Void, Transport> {
+    SocketClient sok;
+
     //public AsyncResponse delegte = null;
 
 
 
     @Override
-    protected Transport doInBackground(Transport... trans) {
-        try {
-            sok = new Socket("192.168.10.170",6001);//10.0.2.2 is the localhost ip interface
+    protected Transport doInBackground(Object... trans) {
 
-        } catch (IOException e) {
-            Log.d("Error", "Error connecting to server");
-        }
-        try {
-            out = new ObjectOutputStream(sok.getOutputStream());
-            out.flush();
-            in = new ObjectInputStream(sok.getInputStream());
+            //sok = new Socket("192.168.10.170",6001);//10.0.2.2 is the localhost ip interface
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sok = (SocketClient) trans[1];
+
+        Transport aux= (Transport)trans[0];
 
         try {
-            Log.d("Teste","TENTAR ESCREVER "+trans[0].getUser().getUsername());
-            out.writeObject(trans[0]);
-            trans[0]=(Transport) in.readObject();
+            Log.d("Teste","TENTAR ESCREVER "+aux.getUser().getUsername());
+            trans[0]=(Transport) sok.sendMessage((Transport) trans[0]);
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return trans[0];
+        return aux;
     }
 
     protected void onPostExecute(Transport result) {
