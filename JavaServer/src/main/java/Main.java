@@ -35,6 +35,7 @@ public class Main {
         System.out.println("server listening to port "+6001);
         Socket sok;
         userList=new ArrayList<>();
+        breakTime= new ArrayList<BreackTime>();
 
 
         while (true) {
