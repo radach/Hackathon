@@ -66,27 +66,19 @@ public class HomeActivity extends AppCompatActivity {
         breaktime_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(breaktime_intent);
-                finish();
-
             }
         });
 
 
         pedir_favor_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 startActivity(pedir_favor_intent);
-                finish();
-
             }
         });
 
         ver_breaktimes_favores_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 startActivity(ver_breaktime_favores_intent);
-                finish();
-
             }
         });
 
@@ -108,10 +100,8 @@ public class HomeActivity extends AppCompatActivity {
 
         logout_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 startActivity(logout_intent);
                 finish();
-
             }
         });
 
@@ -119,9 +109,7 @@ public class HomeActivity extends AppCompatActivity {
         VerPerfil.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
-
                 startActivity(perfil_intent);
-                finish();
             }
         });
 

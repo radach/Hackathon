@@ -11,9 +11,6 @@ import android.util.Log;
 import android.view.View;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.concurrent.ExecutionException;
 
 import AuxClass.SocketClient;
@@ -48,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(intent_menu);
                 finish();
-
             }
         });
     }
