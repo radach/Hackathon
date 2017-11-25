@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.carlos.gamify.BreaktimesAndFavorsActivity">
+
+    <Spinner
+        android:id="@+id/favors_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/breaktime_spinner"
+        android:layout_marginTop="63dp" />
+
+    <Spinner
+        android:id="@+id/breaktime_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/breaktime_text" />
+
+    <TextView
+        android:id="@+id/breaktime_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="22dp"
+        android:text="Breaktime"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/favors_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignBottom="@+id/favors_spinner"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="23dp"
+        android:text="Favores"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="breaktime_options">
+        <item>Opcao1</item>
+        <item>Opcao2</item>
+        <item>Opcao3</item>
+        <item>Opcao4</item>
+        <item>Opcao5</item>
+    </string-array>
+
+    <string-array name="timeout_options">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>
