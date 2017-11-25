@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         final Intent historico_intent = new Intent(this, HistoricoActivity.class);
         final Intent logout_intent = new Intent(this, MainActivity.class);
 
-        VerPerfil = (ImageView) this.findViewById(R.id.home_layout).getRootView();
+        VerPerfil = (ImageView) this.findViewById(R.id.ver_perfil);
 
 
         breaktime_button.setOnClickListener(new View.OnClickListener() {
