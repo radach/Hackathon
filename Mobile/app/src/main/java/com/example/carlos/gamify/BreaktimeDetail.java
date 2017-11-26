@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import AuxClass.User;
+
 public class BreaktimeDetail extends AppCompatActivity {
 
     private ImageView AcceptBreaktime;
@@ -21,6 +23,8 @@ public class BreaktimeDetail extends AppCompatActivity {
 
         Intent received_intent = getIntent();
 
+        User user = (User) getIntent().getSerializableExtra("user");
+
         Breaktime break_info = (Breaktime)received_intent.getSerializableExtra("Breaktime");
 
         String detail_breaktime_text = break_info.getTitle();
@@ -31,6 +35,7 @@ public class BreaktimeDetail extends AppCompatActivity {
 
         final Intent intent_breaktime_detail = new Intent(this, BreaktimesAndFavorsActivity.class);
         intent_breaktime_detail.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent_breaktime_detail.putExtra("user", user);
         Button breaktime_detail_back_button = (Button) findViewById(R.id.breaktime_detail_back_button);
         breaktime_detail_back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
