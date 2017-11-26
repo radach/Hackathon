@@ -26,7 +26,7 @@ public class ControlAux extends Thread {
 
     public void run(){
         try {
-            MqttClient client = new MqttClient("tcp://192.168.10.170:1883", MqttClient.generateClientId());
+            MqttClient client = new MqttClient("tcp://192.168.10.165:1883", MqttClient.generateClientId());
             client.connect();
         } catch (MqttException e) {
             e.printStackTrace();

@@ -11,8 +11,10 @@
     <string name="submit">Submit</string>
     <string name="back">Back</string>
     <string name="score_to_pay">Max Credit Value</string>
-    <string name="score_string">Balance: </string>
+    <string name="score_string">Credits: </string>
     <string name="breaktime_list_text">Breaks: </string>
     <string name="favor_list_text">Tasks: </string>
-    <string name="createTask">Crate Task</string>
+    <string name="createTask">Create Task</string>
+    <string name="running">Running Tasks &amp; Breaks</string>
+    <string name="createBreak">Create Break</string>
 </resources>

@@ -54,7 +54,7 @@ public class Control extends Thread {
     public void run(){
 
         try {
-            client2 = new MqttClient("tcp://192.168.10.170:1883", MqttClient.generateClientId());
+            client2 = new MqttClient("tcp://192.168.10.165:1883", MqttClient.generateClientId());
             client2.connect();
         } catch (MqttException e) {
             e.printStackTrace();

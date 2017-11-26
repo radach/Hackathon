@@ -18,7 +18,7 @@ public class SocketClient implements Serializable {
 
     public void connect() throws IOException {
         //Your connection code will come here
-        sok= new Socket("192.168.10.170",6001);
+        sok= new Socket("192.168.10.165",6001);
         try {
             out = new ObjectOutputStream(sok.getOutputStream());
             out.flush();

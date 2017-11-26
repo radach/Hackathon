@@ -41,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
                 String email_value = email_input.getText().toString();
                 String password_value = password_input.getText().toString();
 
-                User user = connect(v);
+                User user = new User();
+                user.setUsername(email_value);
+                user.setPass(password_value);
+                user = connect(v, user);
                 intent_menu.putExtra("user", user);
 
                 startActivity(intent_menu);
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public User connect(View view) {
+    public User connect(View view, User user) {
         conn=new SocketClient();
         try {
             conn.connect();
@@ -61,8 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
         Transport trans = new Transport();
         User us = new User();
-        us.setUsername("rsantos");
-        us.setPass("rsantos");
+        //us.setUsername("rsantos");
+        //us.setPass("rsantos");
+        us = user;
         trans.setUser(us);
         trans.setOpc(1);
         trans.setLogin(false);

@@ -74,7 +74,8 @@ public class EditPerfilActivity extends AppCompatActivity {
             // Start new list activity
             public void onClick(View v) {
                 //TODO: IMPLEMENT SAVE
-                startActivity(perfil_intent);
+                //startActivity(perfil_intent);
+                finish();
             }
         });
 
@@ -84,7 +85,8 @@ public class EditPerfilActivity extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
-                startActivity(intent);
+                //startActivity(intent);
+                finish();
             }
         });
     }
