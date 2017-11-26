@@ -133,7 +133,8 @@ public class Control extends Thread {
         db.creatAuction(tran,auctions);
         //auctionsThreads.add(tran.getAuction());
         MqttMessage message= new MqttMessage();
-        message.setPayload(tran.getAuction().toString().getBytes());
+        String msg=tran.getAuction().getUser().getUsername()+":auction:"+tran.getAuction().getType()+":"+tran.getAuction().getDate()+":"+tran.getAuction().getDelay()+":"+tran.getAuction().getMax();
+        message.setPayload(msg.getBytes());
         System.out.println(tran.getAuction().toString());
         try {
             client2.publish("data",message);
@@ -146,7 +147,8 @@ public class Control extends Thread {
     private Transport creatBreack(Transport tran) {
         db.creatBreack(tran,breakTime);
         MqttMessage message= new MqttMessage();
-        message.setPayload(tran.getWorkBreak().toString().getBytes());
+        String msg= tran.getWorkBreak().getCreator().getUsername()+":break:"+tran.getWorkBreak().getType()+":"+tran.getWorkBreak().getDate()+":"+tran.getWorkBreak().getDelay();
+        message.setPayload(msg.getBytes());
         System.out.println(tran.getWorkBreak().toString());
         try {
             client2.publish("data",message);
