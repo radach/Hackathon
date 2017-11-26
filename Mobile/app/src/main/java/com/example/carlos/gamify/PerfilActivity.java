@@ -33,10 +33,10 @@ public class PerfilActivity extends AppCompatActivity {
 
         final Intent edit_perfil_intent = new Intent(this, EditPerfilActivity.class);
         edit_perfil_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
+/*
         final Intent back_intent = new Intent(this, HomeActivity.class);
         back_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
+*/
 
         TextView nome_layout =  (TextView) findViewById(R.id.Nome_utilizador_perfil);
         nome_layout.setText(nome);
@@ -67,12 +67,13 @@ public class PerfilActivity extends AppCompatActivity {
         });
 
         Button back_button = (Button) this.findViewById(R.id.profile_back_button);
-        back_intent.putExtra("user", user);
+        //back_intent.putExtra("user", user);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
-                startActivity(back_intent);
+                //startActivity(back_intent);
+                finish();
             }
         });
     }

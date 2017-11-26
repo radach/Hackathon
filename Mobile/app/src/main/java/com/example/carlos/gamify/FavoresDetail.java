@@ -68,14 +68,9 @@ public class FavoresDetail extends AppCompatActivity {
                         error_message_favor.setText("Erro! Não é possivel introduzir um valor maior ou igual à oferta mais baixa!");
                         submit_bid_favor.setEnabled(false);
                     }else{
-
                         submit_bid_favor.setEnabled(true);
-
                     }
-
-
                 }
-
             }
 
             @Override
@@ -97,7 +92,8 @@ public class FavoresDetail extends AppCompatActivity {
             submit_bid_favor.setOnClickListener(new View.OnClickListener() {
                 // Start new list activity
                 public void onClick(View v) {
-                    startActivity(intent_home);
+                    //startActivity(intent_home);
+                    finish();
                 }
             });
 
@@ -110,7 +106,8 @@ public class FavoresDetail extends AppCompatActivity {
         favores_detail_back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
-                startActivity(intent_favores_detail);
+                //startActivity(intent_favores_detail);
+                finish();
             }
         });
 

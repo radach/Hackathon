@@ -45,13 +45,14 @@ public class BreaktimeActivity extends AppCompatActivity {
         timeout_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_timeout.setAdapter(timeout_adapter);
 
-
+/*
         final Intent intent_back = new Intent(this, HomeActivity.class);
         intent_back.putExtra("user", user);
-        intent_back.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent_back.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);*/
         back_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(intent_back);
+                //startActivity(intent_back);
+                finish();
             }
         });
 

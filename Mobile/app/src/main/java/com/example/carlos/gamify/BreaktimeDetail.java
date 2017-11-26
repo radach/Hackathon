@@ -40,7 +40,8 @@ public class BreaktimeDetail extends AppCompatActivity {
         breaktime_detail_back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
-                startActivity(intent_breaktime_detail);
+                //startActivity(intent_breaktime_detail);
+                finish();
             }
         });
 
@@ -52,7 +53,8 @@ public class BreaktimeDetail extends AppCompatActivity {
             // Start new list activity
             public void onClick(View v) {
 
-                startActivity(intent_home);
+                //startActivity(intent_home);
+                finish();
             }
         });
 
@@ -61,7 +63,8 @@ public class BreaktimeDetail extends AppCompatActivity {
             // Start new list activity
             public void onClick(View v) {
 
-                startActivity(intent_breaktime_detail);
+                //startActivity(intent_breaktime_detail);
+                finish();
             }
         });
     }

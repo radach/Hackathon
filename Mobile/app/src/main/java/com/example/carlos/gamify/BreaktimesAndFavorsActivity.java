@@ -105,7 +105,8 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
-                startActivity(back_intent);
+                //startActivity(back_intent);
+                finish();
             }
         });
     }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="breaktime_options">
-        <item>Tomar Café</item>
-        <item>Jogar Matrecos</item>
-        <item>Fumar um cigarro</item>
-        <item>Jogar ping-pong</item>
+        <item>Coffeeeeee</item>
+        <item>Table Football</item>
+        <item>Go for a smoke</item>
+        <item>Ping Pong</item>
     </string-array>
 
     <string-array name="timeout_options">

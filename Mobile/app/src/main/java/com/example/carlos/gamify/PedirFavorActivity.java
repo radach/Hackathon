@@ -48,7 +48,8 @@ public class PedirFavorActivity extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                startActivity(intent_back);
+                //startActivity(intent_back);
+                finish();
             }
         });
 

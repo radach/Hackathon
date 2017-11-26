@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 intent_menu.putExtra("user", user);
 
                 startActivity(intent_menu);
+                finish();
             }
         });
     }

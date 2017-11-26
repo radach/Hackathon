@@ -25,6 +25,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import AuxClass.MqttHelper;
 import AuxClass.SocketClient;
@@ -115,6 +116,7 @@ public class HomeActivity extends AppCompatActivity {
         logout_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(logout_intent);
+                finish();
             }
         });
 
@@ -199,7 +201,8 @@ public class HomeActivity extends AppCompatActivity {
                 NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 // mId allows you to update the notification later on.
                 Notification notif = mBuilder.build();
-                mNotificationManager.notify(33, notif);
+                Random rand = new Random();
+                mNotificationManager.notify(rand.nextInt(), notif);
                 //mChart.addEntry(Float.valueOf(mqttMessage.toString()));
             }
 
