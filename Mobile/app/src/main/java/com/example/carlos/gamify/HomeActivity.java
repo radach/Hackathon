@@ -33,6 +33,8 @@ import AuxClass.SocketClient;
 import AuxClass.Transport;
 import AuxClass.User;
 
+import static java.sql.Types.NULL;
+
 public class HomeActivity extends AppCompatActivity {
     MqttHelper mqttHelper;
     private ImageView VerPerfil;
@@ -144,20 +146,32 @@ public class HomeActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
                 Log.w("Debug", mqttMessage.toString());
                 //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + mqttMessage.toString());
-
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 String[] arr = mqttMessage.toString().split("/");
                 if (user.getUsername().equals(arr[0])) {
-                    //return;
+                    return;
                 }
 
                 Intent resultIntent;
                 NotificationCompat.Builder mBuilder;
 
+                System.out.println("...........................................................");
                 if (arr[1].equals("break")) {
+                    Intent intent_accept = new Intent(cont, auxiliar.class);
+                    intent_accept.putExtra("result", true);
+                    intent_accept.putExtra("owner", arr[0]);
+
+                    PendingIntent pi1 = PendingIntent.getActivity(cont, (int) System.currentTimeMillis(), intent_accept, 0);
+
+                    Intent intent_decline = new Intent(cont, auxiliar.class);
+                    intent_decline.putExtra("result", false);
+                    PendingIntent pi2 = PendingIntent.getActivity(cont, (int) System.currentTimeMillis(), intent_decline, 0);
                     mBuilder =
                             new NotificationCompat.Builder(cont)
                                     .setSmallIcon(R.drawable.ic_launcher_background)
                                     .setContentTitle("Break Opportunity!")
+                                    .addAction(NULL, "Accept", pi1)
+                                    .addAction(NULL, "Decline", pi2)
                                     .setContentText(arr[2]);
 
                     // Creates an explicit intent for an Activity in your app
@@ -165,6 +179,15 @@ public class HomeActivity extends AppCompatActivity {
                     resultIntent.putExtra("user", user);
                     Breaktime bt = new Breaktime(arr[2], arr[3], Integer.parseInt(arr[4]), 0);
                     resultIntent.putExtra("Breaktime", bt);
+                } else if (arr[1].equals("response")) {
+                    resultIntent = new Intent(cont, auxiliar.class);
+                    resultIntent.putExtra("result", false);
+
+                    mBuilder =
+                            new NotificationCompat.Builder(cont)
+                                    .setSmallIcon(R.drawable.ic_launcher_background)
+                                    .setContentTitle("Challange Accepted!")
+                                    .setContentText(arr[2]);
                 } else {
                     mBuilder =
                             new NotificationCompat.Builder(cont)
