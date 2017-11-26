@@ -66,9 +66,6 @@ public class BreaktimeActivity extends AppCompatActivity {
 
                 sendMessage(v, user, breaktime, timeout);
 
-                Toast.makeText(BreaktimeActivity.this, timeout, Toast.LENGTH_SHORT).show();
-
-                Toast.makeText(BreaktimeActivity.this, timeout, Toast.LENGTH_LONG).show();
                 startActivity(intent_submit);
             }
         });

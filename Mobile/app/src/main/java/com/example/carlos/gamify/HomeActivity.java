@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         final Button ver_breaktimes_favores_button = findViewById(R.id.ver_breaktimes_favores_button);
         final Button pedir_favor_button = findViewById(R.id.pedir_favor_button);
         final Button breaktime_button = findViewById(R.id.breaktime_button);
-        final Button button_testNotification = findViewById(R.id.button_notification);
+        //final Button button_testNotification = findViewById(R.id.button_notification);
 
         final Intent breaktime_intent = new Intent(this, BreaktimeActivity.class);
         breaktime_intent.putExtra("user", user);
@@ -117,7 +117,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        button_testNotification.setOnClickListener(new View.OnClickListener() {
+        /*button_testNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("vai notification");
@@ -149,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
                 Notification notif = mBuilder.build();
                 mNotificationManager.notify(33, notif);
             }
-        });
+        });*/
 
     }
 

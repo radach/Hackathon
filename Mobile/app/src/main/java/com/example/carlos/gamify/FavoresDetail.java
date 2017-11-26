@@ -20,10 +20,14 @@ public class FavoresDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favores_detail);
 
-        final int bid_minima = 150;
-        String favor = "Quero Cafe!";
-        String nome = "José";
-        String id = "14";
+        Intent received_intent = getIntent();
+
+        Favor favor_info = (Favor)received_intent.getSerializableExtra("Favor");
+
+        final int bid_minima = favor_info.getLowest_bid();
+        String favor = favor_info.getTitle();
+        String nome = favor_info.getUser().getName();
+        String id = Integer.toString(favor_info.getUser().getId());
 
 
         TextView favores_detail = (TextView) findViewById(R.id.favores_detail);

@@ -60,6 +60,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Title : " + title +"\n"
                                 +"Timeout: " + timeout, Toast.LENGTH_SHORT).show();
+                bdetails_intent.putExtra("Breaktime", breaktimesList.get(position));
                 startActivity(bdetails_intent);
             }
         });
@@ -89,6 +90,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
                         "Title : " + title +"\n"
                                 +"Timeout: " + timeout + "\n"
                                 +"Lowest Bid: " + lowest_bid, Toast.LENGTH_SHORT).show();
+                fdetails_intent.putExtra("Favor", favorsList.get(position));
                 startActivity(fdetails_intent);
             }
         });
@@ -128,7 +130,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
         ArrayList<Auction> aux = trans.getAuctions();
         Favor aux2;
         for (int i=0; i<aux.size(); i++){
-            aux2 = new Favor(aux.get(i).getType(), aux.get(i).getDelay(), aux.get(i).getMax(),i);
+            aux2 = new Favor(aux.get(i).getType(), aux.get(i).getDelay(), aux.get(i).getMax(),i,aux.get(i).getUser());
             favorsList.add(aux2);
         }
     }

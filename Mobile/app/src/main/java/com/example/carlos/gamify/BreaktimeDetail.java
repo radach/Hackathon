@@ -19,9 +19,14 @@ public class BreaktimeDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breaktime_detail);
 
-        String detail_breaktime_text ="Joguinho de Matrecos";
+        Intent received_intent = getIntent();
+
+        Breaktime break_info = (Breaktime)received_intent.getSerializableExtra("Breaktime");
+
+        String detail_breaktime_text = break_info.getTitle();
         TextView breaktime_detail =  (TextView) findViewById(R.id.breaktime_detail);
         breaktime_detail.setText(detail_breaktime_text);
+
 
 
         final Intent intent_breaktime_detail = new Intent(this, BreaktimesAndFavorsActivity.class);

@@ -4,14 +4,15 @@
         <item>Tomar Café</item>
         <item>Jogar Matrecos</item>
         <item>Fumar um cigarro</item>
+        <item>Jogar um ping-pong</item>
     </string-array>
 
     <string-array name="timeout_options">
-        <item>1 minuto</item>
-        <item>2 minutos</item>
-        <item>3 minutos</item>
-        <item>4 minutos</item>
-        <item>5 minutos</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 
     <string-array name="andares">
