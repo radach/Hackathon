@@ -51,7 +51,6 @@ public class BreaktimeActivity extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intent_back);
-                finish();
             }
         });
 

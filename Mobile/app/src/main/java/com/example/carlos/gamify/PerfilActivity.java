@@ -57,7 +57,6 @@ public class PerfilActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(edit_perfil_intent);
-                finish();
             }
         });
 
@@ -67,7 +66,6 @@ public class PerfilActivity extends AppCompatActivity {
             // Start new list activity
             public void onClick(View v) {
                 startActivity(back_intent);
-                finish();
             }
         });
     }

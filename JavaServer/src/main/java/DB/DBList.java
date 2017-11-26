@@ -46,9 +46,11 @@ public class DBList implements DBControl {
 
     @Override
     public Transport creatAuction(Transport tran, Object auctionList){
+        System.out.println("create auction");
         ArrayList<Auction> auctions = (ArrayList<Auction>) auctionList;
         auctions.add(tran.getAuction());
         tran.setResullt("true:auction created");
+        System.out.println("auction"+auctions.size());
         return tran;
     }
 

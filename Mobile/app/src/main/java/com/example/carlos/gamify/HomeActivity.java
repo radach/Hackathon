@@ -11,21 +11,27 @@ import android.support.v4.app.NotificationCompat;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
-
+import AuxClass.MqttHelper;
 import AuxClass.SocketClient;
 import AuxClass.Transport;
 import AuxClass.User;
 
 public class HomeActivity extends AppCompatActivity {
     private boolean asyncCreated;
+    MqttHelper mqttHelper;
     private ImageView VerPerfil;
 
     @Override
@@ -33,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        startMqtt();
         Resources res = getResources();
         int user_score = 0;
         User user = (User) getIntent().getSerializableExtra("user");
@@ -111,7 +118,6 @@ public class HomeActivity extends AppCompatActivity {
         logout_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(logout_intent);
-                finish();
             }
         });
 
@@ -189,6 +195,34 @@ public class HomeActivity extends AppCompatActivity {
             }
         });*/
     }
+
+    private void startMqtt(){
+        mqttHelper = new MqttHelper(getApplicationContext());
+        mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
+            @Override
+            public void connectComplete(boolean b, String s) {
+                Log.w("Debug","Connected");
+            }
+
+            @Override
+            public void connectionLost(Throwable throwable) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+                Log.w("Debug",mqttMessage.toString());
+
+                //mChart.addEntry(Float.valueOf(mqttMessage.toString()));
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+
+            }
+        });
+    }
+
 
 
 }

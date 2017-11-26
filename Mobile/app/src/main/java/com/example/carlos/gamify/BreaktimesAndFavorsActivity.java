@@ -1,11 +1,13 @@
 package com.example.carlos.gamify;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,6 +34,9 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breaktimes_and_favors);
 
+        Button back_button = (Button) findViewById(R.id.break_favor_back_button);
+
+
         breaktimesList = new ArrayList<Breaktime>();
         favorsList = new ArrayList<Favor>();
         ListView lview_breaktimes = (ListView) findViewById(R.id.breaktime_list);
@@ -56,7 +61,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
             }
         });
 
-        /*ListView lview_favors = (ListView) findViewById(R.id.favor_list);
+        ListView lview_favors = (ListView) findViewById(R.id.favor_list);
 
         FavorListAdapter favor_adapter = new FavorListAdapter(this, favorsList);
         lview_favors.setAdapter(favor_adapter);
@@ -80,7 +85,45 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
                                 +"Timeout: " + timeout + "\n"
                                 +"Lowest Bid: " + lowest_bid, Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
+
+        final Intent back_intent = new Intent(this, HomeActivity.class);
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            // Start new list activity
+            public void onClick(View v) {
+                startActivity(back_intent);
+            }
+        });
+    }
+
+    private void populateFavorsList(){
+        conn = new SocketClient();
+        try {
+            conn.connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Transport trans = new Transport();
+        trans.setOpc(4);
+        try {
+            trans = new SendToServer().execute(trans, conn).get();
+            conn.disconnect();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Auction> aux = trans.getAuctions();
+        Favor aux2;
+        for (int i=0; i<aux.size(); i++){
+            aux2 = new Favor(aux.get(i).getType(), aux.get(i).getDelay(), aux.get(i).getMax(),i);
+            favorsList.add(aux2);
+        }
     }
 
     private void populateBreaktimesLists() {
