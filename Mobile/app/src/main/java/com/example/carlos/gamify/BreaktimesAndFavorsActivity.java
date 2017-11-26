@@ -134,7 +134,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
         ArrayList<Auction> aux = trans.getAuctions();
         Favor aux2;
         for (int i=0; i<aux.size(); i++){
-            aux2 = new Favor(aux.get(i).getType(), aux.get(i).getDelay(), aux.get(i).getMax(),i,aux.get(i).getUser());
+            aux2 = new Favor(aux.get(i).getType(), aux.get(i).getDate().toString(), aux.get(i).getDelay(), aux.get(i).getMax(),i,aux.get(i).getUser());
             favorsList.add(aux2);
         }
     }
@@ -163,7 +163,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
         ArrayList<BreackTime> aux = trans.getBreackTimes();
         Breaktime aux2;
         for (int i=0; i<aux.size(); i++){
-            aux2 = new Breaktime(aux.get(i).getType(), aux.get(i).getDelay(), i);
+            aux2 = new Breaktime(aux.get(i).getType(), aux.get(i).getDate().toString(), aux.get(i).getDelay(), i);
             breaktimesList.add(aux2);
         }
     }

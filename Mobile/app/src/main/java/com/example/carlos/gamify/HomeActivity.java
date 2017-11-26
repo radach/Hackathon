@@ -24,6 +24,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import AuxClass.MqttHelper;
 import AuxClass.SocketClient;
 import AuxClass.Transport;
@@ -33,16 +35,26 @@ public class HomeActivity extends AppCompatActivity {
     private boolean asyncCreated;
     MqttHelper mqttHelper;
     private ImageView VerPerfil;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        startMqtt(getBaseContext());
+        user = (User) getIntent().getSerializableExtra("user");
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                startMqtt(getApplicationContext(), user);
+            }
+        });
+
+//        startMqtt(getApplicationContext(), user);
         Resources res = getResources();
         int user_score = 0;
-        User user = (User) getIntent().getSerializableExtra("user");
+
         asyncCreated = getIntent().getBooleanExtra("async", false);
         if (asyncCreated == false)
             asyncCreated = true;
@@ -100,22 +112,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        /*motivar_button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                startActivity(motivar_intent);
-
-            }
-        });
-
-        historico_button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                startActivity(historico_intent);
-
-            }
-        });*/
-
         logout_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(logout_intent);
@@ -129,44 +125,10 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(perfil_intent);
             }
         });
-
-
-        /*button_testNotification.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(view.getContext())
-                                .setSmallIcon(R.drawable.ic_launcher_background)
-                                .setContentTitle("My notification")
-                                .setContentText("Hello World!");
-
-                // Creates an explicit intent for an Activity in your app
-                Intent resultIntent = new Intent(view.getContext(), BreaktimeActivity.class);
-                resultIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
-                // The stack builder object will contain an artificial back stack for the started Activity.
-                // This ensures that navigating backward from the Activity leads out of your application to the Home screen.
-                TaskStackBuilder stackBuilder = TaskStackBuilder.create(view.getContext());
-                // Adds the back stack for the Intent (but not the Intent itself)
-                stackBuilder.addParentStack(HomeActivity.class);
-                // Adds the Intent that starts the Activity to the top of the stack
-                stackBuilder.addNextIntent(resultIntent);
-                PendingIntent resultPendingIntent =
-                        stackBuilder.getPendingIntent(
-                                0,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
-                mBuilder.setContentIntent(resultPendingIntent);
-                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                // mId allows you to update the notification later on.
-                Notification notif = mBuilder.build();
-                mNotificationManager.notify(33, notif);
-            }
-        });*/
     }
 
-    private void startMqtt(final Context cont){
+
+    private void startMqtt(final Context cont, final User user){
         mqttHelper = new MqttHelper(getApplicationContext());
         mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
@@ -181,16 +143,44 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                Log.w("Debug",mqttMessage.toString());
+                Log.w("Debug", mqttMessage.toString());
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + user.getUsername() + " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + mqttMessage.toString());
 
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(cont)
-                                .setSmallIcon(R.drawable.ic_launcher_background)
-                                .setContentTitle("My notification")
-                                .setContentText("Hello World!");
+                String[] arr = mqttMessage.toString().split(":");
+                if (user.getUsername().equals(arr[0])) {
+                    //return;
+                }
 
-                // Creates an explicit intent for an Activity in your app
-                Intent resultIntent = new Intent(cont, BreaktimeActivity.class);
+                Intent resultIntent;
+                NotificationCompat.Builder mBuilder;
+
+                if (arr[1].equals("break")) {
+                    mBuilder =
+                            new NotificationCompat.Builder(cont)
+                                    .setSmallIcon(R.drawable.ic_launcher_background)
+                                    .setContentTitle("Break Opportunity!")
+                                    .setContentText(arr[2]);
+
+                    // Creates an explicit intent for an Activity in your app
+                    resultIntent = new Intent(cont, BreaktimeDetail.class);
+                    resultIntent.putExtra("user", user);
+                    Breaktime bt = new Breaktime(arr[2], arr[3], Integer.parseInt(arr[4]), 0);
+                    resultIntent.putExtra("Breaktime", bt);
+                    System.out.println("--------------------- end1");
+                } else {
+                    mBuilder =
+                            new NotificationCompat.Builder(cont)
+                                    .setSmallIcon(R.drawable.ic_launcher_background)
+                                    .setContentTitle("Someone needs a hand!")
+                                    .setContentText(arr[2]);
+
+                    // Creates an explicit intent for an Activity in your app
+                    resultIntent = new Intent(cont, FavoresDetail.class);
+                    resultIntent.putExtra("user", user);
+                    Favor fv = new Favor(arr[2], arr[3], Integer.parseInt(arr[4]), Integer.parseInt(arr[5]), 0, user);
+                    resultIntent.putExtra("Favor", fv);
+                }
+
 
                 // The stack builder object will contain an artificial back stack for the started Activity.
                 // This ensures that navigating backward from the Activity leads out of your application to the Home screen.

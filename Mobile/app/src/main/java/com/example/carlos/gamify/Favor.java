@@ -16,13 +16,15 @@ public class Favor implements Serializable{
     private int ID;
     private int lowest_bid;
     private User user;
+    private String date;
 
-    public Favor(String title, int time_remaining, int lowest_bid, int ID, User user){
+    public Favor(String title, String date, int time_remaining, int lowest_bid, int ID, User user){
         this.title = title;
         this.time_remaining = time_remaining;
         this.lowest_bid = lowest_bid;
         this.ID = ID;
         this.user = user;
+        this.date = date;
     }
 
     public String getTitle(){

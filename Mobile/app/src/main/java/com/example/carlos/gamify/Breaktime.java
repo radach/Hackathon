@@ -11,11 +11,13 @@ public class Breaktime implements Serializable{
     private String title;
     private int time_remaining;
     private int ID;
+    private String date;
 
-    public Breaktime(String title, int time_remaining, int ID){
+    public Breaktime(String title, String date, int time_remaining, int ID){
         this.title = title;
         this.time_remaining = time_remaining;
         this.ID = ID;
+        this.date = date;
     }
 
     public String getTitle(){
