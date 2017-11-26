@@ -67,7 +67,8 @@ public class BreaktimeActivity extends AppCompatActivity {
 
                 sendMessage(v, user, breaktime, timeout);
 
-                startActivity(intent_submit);
+                //startActivity(intent_submit);
+                finish();
             }
         });
     }

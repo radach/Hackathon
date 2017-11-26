@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.w3c.dom.Text;
 
@@ -33,7 +34,6 @@ import AuxClass.Transport;
 import AuxClass.User;
 
 public class HomeActivity extends AppCompatActivity {
-    private boolean asyncCreated;
     MqttHelper mqttHelper;
     private ImageView VerPerfil;
     User user;
@@ -45,20 +45,17 @@ public class HomeActivity extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra("user");
 
-        AsyncTask.execute(new Runnable() {
+        /*AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 startMqtt(getApplicationContext(), user);
             }
-        });
+        });*/
 
-//        startMqtt(getApplicationContext(), user);
+        startMqtt(getApplicationContext(), user);
+
         Resources res = getResources();
         int user_score = 0;
-
-        asyncCreated = getIntent().getBooleanExtra("async", false);
-        if (asyncCreated == false)
-            asyncCreated = true;
 
         //final Button motivar_button = findViewById(R.id.motivar_button);
         final Button logout_button = findViewById(R.id.logout_button);
@@ -146,7 +143,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
                 Log.w("Debug", mqttMessage.toString());
-                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + user.getUsername() + " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + mqttMessage.toString());
+                //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + mqttMessage.toString());
 
                 String[] arr = mqttMessage.toString().split("/");
                 if (user.getUsername().equals(arr[0])) {
@@ -156,7 +153,6 @@ public class HomeActivity extends AppCompatActivity {
                 Intent resultIntent;
                 NotificationCompat.Builder mBuilder;
 
-                System.out.println("---------- -asd- asdsda-asdas");
                 if (arr[1].equals("break")) {
                     mBuilder =
                             new NotificationCompat.Builder(cont)
@@ -181,15 +177,13 @@ public class HomeActivity extends AppCompatActivity {
                     resultIntent.putExtra("user", user);
                     Favor fv = new Favor(arr[2], arr[3], Integer.parseInt(arr[4]), Integer.parseInt(arr[5]), 0, user);
                     resultIntent.putExtra("Favor", fv);
-                    System.out.println("--------------------- end1");
                 }
-                System.out.println("passourururuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
-
+                resultIntent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 // The stack builder object will contain an artificial back stack for the started Activity.
                 // This ensures that navigating backward from the Activity leads out of your application to the Home screen.
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(cont);
                 // Adds the back stack for the Intent (but not the Intent itself)
-                stackBuilder.addParentStack(HomeActivity.class);
+                stackBuilder.addParentStack(BreaktimeDetail.class);
                 // Adds the Intent that starts the Activity to the top of the stack
                 stackBuilder.addNextIntent(resultIntent);
                 PendingIntent resultPendingIntent =

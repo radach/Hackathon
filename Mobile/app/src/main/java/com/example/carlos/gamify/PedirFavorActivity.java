@@ -61,14 +61,19 @@ public class PedirFavorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String auction_title = favor_description.getText().toString();
                 String max = spinner_timeout.getSelectedItem().toString();
+                if (auction_title.isEmpty() || max.isEmpty()) {
+                    Toast.makeText(PedirFavorActivity.this, "Please no blanco fields :)", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String timeout = credits.getText().toString();
 
                 sendMessage(v, user, auction_title, timeout, max);
 
-                Toast.makeText(PedirFavorActivity.this, timeout, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PedirFavorActivity.this, timeout, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(PedirFavorActivity.this, max, Toast.LENGTH_LONG).show();
-                startActivity(intent_submit);
+                //Toast.makeText(PedirFavorActivity.this, max, Toast.LENGTH_LONG).show();
+                //startActivity(intent_submit);
+                finish();
             }
         });
     }
