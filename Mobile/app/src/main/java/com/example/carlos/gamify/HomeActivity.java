@@ -161,7 +161,7 @@ public class HomeActivity extends AppCompatActivity {
                 Notification notif = mBuilder.build();
                 mNotificationManager.notify(33, notif);
             }
-        });*/
+        });
 
             @Override
             public void run() {
