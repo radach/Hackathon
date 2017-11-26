@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import AuxClass.User;
+
 public class FavoresDetail extends AppCompatActivity {
 
     int valor_bid = 0;
@@ -45,6 +47,9 @@ public class FavoresDetail extends AppCompatActivity {
 
 
         final Intent intent_home = new Intent(this, HomeActivity.class);
+
+        User user = (User) getIntent().getSerializableExtra("user");
+        intent_home.putExtra("user", user);
         intent_home.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         final Button submit_bid_favor = (Button) findViewById(R.id.submit_bid_favor);
 
@@ -100,6 +105,7 @@ public class FavoresDetail extends AppCompatActivity {
 
         final Intent intent_favores_detail = new Intent(this, BreaktimesAndFavorsActivity.class);
         intent_favores_detail.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent_favores_detail.putExtra("user", user);
         Button favores_detail_back_button = (Button) findViewById(R.id.favores_detail_back_button);
         favores_detail_back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity

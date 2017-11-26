@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import AuxClass.User;
+
 public class PerfilActivity extends AppCompatActivity {
 
     private ImageView EditPerfil;
@@ -26,6 +28,8 @@ public class PerfilActivity extends AppCompatActivity {
         String nome = "Jose Antunes";
         String id = "1";
         String andar = "4º";
+
+        User user = (User) getIntent().getSerializableExtra("user");
 
         final Intent edit_perfil_intent = new Intent(this, EditPerfilActivity.class);
         edit_perfil_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -53,6 +57,7 @@ public class PerfilActivity extends AppCompatActivity {
 
 
         EditPerfil = (ImageView) this.findViewById(R.id.edit_perfil_button);
+        edit_perfil_intent.putExtra("user", user);
         EditPerfil.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
@@ -62,6 +67,7 @@ public class PerfilActivity extends AppCompatActivity {
         });
 
         Button back_button = (Button) this.findViewById(R.id.profile_back_button);
+        back_intent.putExtra("user", user);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity

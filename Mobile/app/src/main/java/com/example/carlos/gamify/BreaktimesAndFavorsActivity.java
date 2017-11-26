@@ -36,6 +36,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
 
         Button back_button = (Button) findViewById(R.id.break_favor_back_button);
 
+        User user = (User) getIntent().getSerializableExtra("user");
 
         breaktimesList = new ArrayList<Breaktime>();
         favorsList = new ArrayList<Favor>();
@@ -48,6 +49,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
 
         final Intent bdetails_intent = new Intent(this, BreaktimeDetail.class);
         bdetails_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        bdetails_intent.putExtra("user", user);
         lview_breaktimes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -75,6 +77,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
         favor_adapter.notifyDataSetChanged();
 
         final Intent fdetails_intent = new Intent(this, FavoresDetail.class);
+        fdetails_intent.putExtra("user", user);
         fdetails_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         lview_favors.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -97,6 +100,7 @@ public class BreaktimesAndFavorsActivity extends AppCompatActivity {
 
         final Intent back_intent = new Intent(this, HomeActivity.class);
         back_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        back_intent.putExtra("user", user);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity

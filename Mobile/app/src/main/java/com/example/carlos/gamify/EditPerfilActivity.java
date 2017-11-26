@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import AuxClass.User;
+
 public class EditPerfilActivity extends AppCompatActivity {
 
     private Button SaveChanges;
@@ -26,8 +28,11 @@ public class EditPerfilActivity extends AppCompatActivity {
         String nome = "Jose Antunes";
         int pos_andar = 1;
 
+        User user = (User) getIntent().getSerializableExtra("user");
+
         final Intent perfil_intent = new Intent(this, PerfilActivity.class);
         perfil_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        perfil_intent.putExtra("user", user);
 
 
         EditText input_name_edit_perfil =  (EditText) findViewById(R.id.input_name_edit_perfil);
@@ -75,7 +80,7 @@ public class EditPerfilActivity extends AppCompatActivity {
 
         final Intent intent = new Intent(this, PerfilActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
+        intent.putExtra("user", user);
         back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity
             public void onClick(View v) {
