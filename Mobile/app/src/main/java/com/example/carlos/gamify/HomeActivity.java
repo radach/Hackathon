@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
@@ -17,11 +18,14 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+
 import AuxClass.SocketClient;
+import AuxClass.Transport;
 import AuxClass.User;
 
 public class HomeActivity extends AppCompatActivity {
-
+    private boolean asyncCreated;
     private ImageView VerPerfil;
 
     @Override
@@ -32,6 +36,9 @@ public class HomeActivity extends AppCompatActivity {
         Resources res = getResources();
         int user_score = 0;
         User user = (User) getIntent().getSerializableExtra("user");
+        asyncCreated = getIntent().getBooleanExtra("async", false);
+        if (asyncCreated == false)
+            asyncCreated = true;
 
         //final Button motivar_button = findViewById(R.id.motivar_button);
         final Button logout_button = findViewById(R.id.logout_button);
@@ -43,15 +50,19 @@ public class HomeActivity extends AppCompatActivity {
 
         final Intent breaktime_intent = new Intent(this, BreaktimeActivity.class);
         breaktime_intent.putExtra("user", user);
+        breaktime_intent.putExtra("async", asyncCreated);
 
         final Intent perfil_intent = new Intent(this, PerfilActivity.class);
         perfil_intent.putExtra("user", user);
+        perfil_intent.putExtra("async", asyncCreated);
 
         final Intent pedir_favor_intent = new Intent(this, PedirFavorActivity.class);
         pedir_favor_intent.putExtra("user", user);
+        pedir_favor_intent.putExtra("async", asyncCreated);
 
         final Intent ver_breaktime_favores_intent = new Intent(this, BreaktimesAndFavorsActivity.class);
         ver_breaktime_favores_intent.putExtra("user", user);
+        ver_breaktime_favores_intent.putExtra("async", asyncCreated);
 
         //final Intent motivar_intent = new Intent(this, MotivarActivity.class);
         //final Intent historico_intent = new Intent(this, HistoricoActivity.class);
@@ -61,7 +72,6 @@ public class HomeActivity extends AppCompatActivity {
         score.setText(res.getString(R.string.score_string) + " " + Integer.toString(user_score));
 
         VerPerfil = (ImageView) this.findViewById(R.id.ver_perfil);
-
 
         breaktime_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -116,7 +126,6 @@ public class HomeActivity extends AppCompatActivity {
         button_testNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("vai notification");
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(view.getContext())
                                 .setSmallIcon(R.drawable.ic_launcher_background)
@@ -145,7 +154,40 @@ public class HomeActivity extends AppCompatActivity {
                 mNotificationManager.notify(33, notif);
             }
         });
+/*
+        AsyncTask.execute(new Runnable() {
+            Transport tp;
+            final SocketClient socNotif = new SocketClient();
 
+            @Override
+            public void run() {
+                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                try {
+                    socNotif.connect2();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                while(true) {
+                    System.out.println("------------------------ RUNNING BACKGROUND -------------------");
+                    try {
+                        tp = socNotif.receiveMessage();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println(">>>>>TP: " + tp.getResullt());
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });*/
     }
 
 
