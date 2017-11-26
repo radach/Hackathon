@@ -3,44 +3,75 @@ import AuxClass.BreackTime;
 import AuxClass.Transport;
 import AuxClass.User;
 import DB.DBList;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import javax.naming.NamingException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Control extends Thread {
     Socket client;
+    MqttClient client2;
+
     ObjectInputStream in;
     ObjectOutputStream out;
+    ObjectInputStream in2;
+    ObjectOutputStream out2;
     ArrayList<User> userList;
     ArrayList<BreackTime> breakTime;
     ArrayList<Auction>auctions;
+    ArrayList<Socket> lista;
+
+    ArrayList<Auction>auctionsThreads;
+    ArrayList<BreackTime> breakTimeThreads;
+
+
+
     String username;
     DBList db;
 
 
 
-    public  Control(Socket cli, ArrayList <User> userList, ArrayList<BreackTime> breakTime, ArrayList<Auction> auctions) throws SQLException, NamingException, ClassNotFoundException {
+    public  Control(Socket cli, ArrayList<User> userList, ArrayList<BreackTime> breakTime, ArrayList<Auction> auctions, ArrayList<Socket> lista, ArrayList<Auction> auctionsThreads, ArrayList<BreackTime> breakTimeThreads) throws SQLException, NamingException, ClassNotFoundException {
         this.client=cli;
+        //this.client2=sok2;
         this.userList=userList;
         this.breakTime=breakTime;
         this.auctions=auctions;
         db=new DBList();
+        this.lista=lista;
+        this.auctionsThreads=auctionsThreads;
+        this.breakTimeThreads=breakTimeThreads;
     }
 
     public void run(){
+
+        try {
+            client2 = new MqttClient("tcp://192.168.10.170:1883", MqttClient.generateClientId());
+            client2.connect();
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
+
         System.out.println("init" + client.getInetAddress());
         try {
 
             out = new ObjectOutputStream(client.getOutputStream());
+            //out2 = new ObjectOutputStream(client2.getOutputStream());
             System.out.println("stream criadas");
             out.flush();
+            //out2.flush();
             System.out.println("antes");
             in = new ObjectInputStream(client.getInputStream());
+
             System.out.println("in");
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,6 +86,7 @@ public class Control extends Thread {
             e.printStackTrace();
         }
 
+
     }
 
     private void menu() throws IOException, ClassNotFoundException {
@@ -62,6 +94,8 @@ public class Control extends Thread {
         creatUsers();
         while (true){
             tran= (Transport) in.readObject();
+            //if (tran.getOpc()!=1)
+
             switch (tran.getOpc()){
                 case 1:
                     System.out.println("antes login" + tran.getOpc()+" " +tran.getUser().getUsername());
@@ -86,6 +120,8 @@ public class Control extends Thread {
         }
     }
 
+
+
     private Transport readDatabase(Transport tran) {
         tran.setUsers(userList);
         tran.setBreackTimes(breakTime);
@@ -95,11 +131,28 @@ public class Control extends Thread {
 
     private Transport creatAuction(Transport tran) {
         db.creatAuction(tran,auctions);
+        //auctionsThreads.add(tran.getAuction());
+        MqttMessage message= new MqttMessage();
+        message.setPayload(tran.getAuction().toString().getBytes());
+        System.out.println(tran.getAuction().toString());
+        try {
+            client2.publish("data",message);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
         return tran;
     }
 
     private Transport creatBreack(Transport tran) {
         db.creatBreack(tran,breakTime);
+        MqttMessage message= new MqttMessage();
+        message.setPayload(tran.getWorkBreak().toString().getBytes());
+        System.out.println(tran.getWorkBreak().toString());
+        try {
+            client2.publish("data",message);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
         return tran;
     }
 
@@ -113,7 +166,17 @@ public class Control extends Thread {
         us1.setBalanceWork(500);
         us1.setName("rsantos");
         us1.setBio("cenas");
+        User us2=new User();
+        us2.setPiso(8);
+        us2.setId(2);
+        us2.setUsername("rsantos2");
+        us2.setPass("rsantos2");
+        us2.setBalanceFun(500);
+        us2.setBalanceWork(500);
+        us2.setName("rsantos2");
+        us2.setBio("cenas2");
         userList.add(us1);
+        userList.add(us2);
     }
 
 
@@ -121,8 +184,8 @@ public class Control extends Thread {
 
 
     private Transport login(Transport tran) {
-
-        return db.logUser(tran,userList);
+        tran = db.logUser(tran,userList);
+        return tran;
     }
 
 
