@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         
         final Button button = findViewById(R.id.login_button);
         final Intent intent_menu = new Intent(this, HomeActivity.class);
+        intent_menu.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
