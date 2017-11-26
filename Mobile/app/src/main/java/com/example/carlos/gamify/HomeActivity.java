@@ -146,7 +146,7 @@ public class HomeActivity extends AppCompatActivity {
                 Log.w("Debug", mqttMessage.toString());
                 System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + user.getUsername() + " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + mqttMessage.toString());
 
-                String[] arr = mqttMessage.toString().split(":");
+                String[] arr = mqttMessage.toString().split("/");
                 if (user.getUsername().equals(arr[0])) {
                     //return;
                 }
@@ -154,6 +154,7 @@ public class HomeActivity extends AppCompatActivity {
                 Intent resultIntent;
                 NotificationCompat.Builder mBuilder;
 
+                System.out.println("---------- -asd- asdsda-asdas");
                 if (arr[1].equals("break")) {
                     mBuilder =
                             new NotificationCompat.Builder(cont)
@@ -166,7 +167,6 @@ public class HomeActivity extends AppCompatActivity {
                     resultIntent.putExtra("user", user);
                     Breaktime bt = new Breaktime(arr[2], arr[3], Integer.parseInt(arr[4]), 0);
                     resultIntent.putExtra("Breaktime", bt);
-                    System.out.println("--------------------- end1");
                 } else {
                     mBuilder =
                             new NotificationCompat.Builder(cont)
@@ -179,8 +179,9 @@ public class HomeActivity extends AppCompatActivity {
                     resultIntent.putExtra("user", user);
                     Favor fv = new Favor(arr[2], arr[3], Integer.parseInt(arr[4]), Integer.parseInt(arr[5]), 0, user);
                     resultIntent.putExtra("Favor", fv);
+                    System.out.println("--------------------- end1");
                 }
-
+                System.out.println("passourururuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
 
                 // The stack builder object will contain an artificial back stack for the started Activity.
                 // This ensures that navigating backward from the Activity leads out of your application to the Home screen.
