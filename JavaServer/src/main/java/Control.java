@@ -145,7 +145,14 @@ public class Control extends Thread {
 
     private Transport creatBreack(Transport tran) {
         db.creatBreack(tran,breakTime);
-        //breakTimeThreads.add(tran.getWorkBreak());
+        MqttMessage message= new MqttMessage();
+        message.setPayload(tran.getWorkBreak().toString().getBytes());
+        System.out.println(tran.getWorkBreak().toString());
+        try {
+            client2.publish("data",message);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
         return tran;
     }
 
