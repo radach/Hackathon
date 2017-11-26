@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        startMqtt();
+        startMqtt(getBaseContext());
         Resources res = getResources();
         int user_score = 0;
         User user = (User) getIntent().getSerializableExtra("user");
@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(perfil_intent);
             }
         });
-
+/*
         button_testNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,44 +159,10 @@ public class HomeActivity extends AppCompatActivity {
                 Notification notif = mBuilder.build();
                 mNotificationManager.notify(33, notif);
             }
-        });
-/*
-        AsyncTask.execute(new Runnable() {
-            Transport tp;
-            final SocketClient socNotif = new SocketClient();
-
-            @Override
-            public void run() {
-                System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-                try {
-                    socNotif.connect2();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                while(true) {
-                    System.out.println("------------------------ RUNNING BACKGROUND -------------------");
-                    try {
-                        tp = socNotif.receiveMessage();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-                    System.out.println(">>>>>TP: " + tp.getResullt());
-
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
         });*/
     }
 
-    private void startMqtt(){
+    private void startMqtt(final Context cont){
         mqttHelper = new MqttHelper(getApplicationContext());
         mqttHelper.mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
@@ -213,6 +179,32 @@ public class HomeActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
                 Log.w("Debug",mqttMessage.toString());
 
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(cont)
+                                .setSmallIcon(R.drawable.ic_launcher_background)
+                                .setContentTitle("My notification")
+                                .setContentText("Hello World!");
+
+                // Creates an explicit intent for an Activity in your app
+                Intent resultIntent = new Intent(cont, BreaktimeActivity.class);
+
+                // The stack builder object will contain an artificial back stack for the started Activity.
+                // This ensures that navigating backward from the Activity leads out of your application to the Home screen.
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(cont);
+                // Adds the back stack for the Intent (but not the Intent itself)
+                stackBuilder.addParentStack(HomeActivity.class);
+                // Adds the Intent that starts the Activity to the top of the stack
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                // mId allows you to update the notification later on.
+                Notification notif = mBuilder.build();
+                mNotificationManager.notify(33, notif);
                 //mChart.addEntry(Float.valueOf(mqttMessage.toString()));
             }
 
