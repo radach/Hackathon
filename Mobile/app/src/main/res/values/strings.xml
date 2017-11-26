@@ -12,4 +12,6 @@
     <string name="back">Voltar</string>
     <string name="score_to_pay">Pontuação a "pagar", no máximo</string>
     <string name="score_string">Pontuação: </string>
+    <string name="breaktime_list_text">Breaktimes: </string>
+    <string name="favor_list_text">Favores: </string>
 </resources>

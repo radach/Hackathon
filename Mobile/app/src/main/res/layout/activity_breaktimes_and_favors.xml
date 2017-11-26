@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.05"
-        android:text="Placeholder"
+        android:text="@string/breaktime_list_text"
         android:textSize="18sp" />
 
     <ListView
@@ -24,7 +24,7 @@
         android:id="@+id/favors_list_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Placeholder"
+        android:text="@string/favor_list_text"
         android:layout_weight="0.05"
         android:textSize="18sp" />
 

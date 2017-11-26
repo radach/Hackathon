@@ -23,7 +23,9 @@
         <activity android:name=".BreaktimesAndFavorsActivity" />
         <activity android:name=".MotivarActivity" />
         <activity android:name=".HistoricoActivity"/>
-        <activity android:name=".EditPerfilActivity"></activity>
+        <activity android:name=".EditPerfilActivity"/>
+        <activity android:name=".BreaktimeDetail"/>
+        <activity android:name=".FavoresDetail"></activity>
         <service android:name="org.eclipse.paho.android.service.MqttService">
         </service>
     </application>

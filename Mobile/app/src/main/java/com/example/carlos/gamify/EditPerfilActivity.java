@@ -27,7 +27,7 @@ public class EditPerfilActivity extends AppCompatActivity {
         int pos_andar = 1;
 
         final Intent perfil_intent = new Intent(this, PerfilActivity.class);
-
+        perfil_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
 
         EditText input_name_edit_perfil =  (EditText) findViewById(R.id.input_name_edit_perfil);
@@ -74,6 +74,7 @@ public class EditPerfilActivity extends AppCompatActivity {
         });
 
         final Intent intent = new Intent(this, PerfilActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             // Start new list activity

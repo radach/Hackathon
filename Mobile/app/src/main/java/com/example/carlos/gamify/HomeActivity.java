@@ -53,27 +53,28 @@ public class HomeActivity extends AppCompatActivity {
         final Button ver_breaktimes_favores_button = findViewById(R.id.ver_breaktimes_favores_button);
         final Button pedir_favor_button = findViewById(R.id.pedir_favor_button);
         final Button breaktime_button = findViewById(R.id.breaktime_button);
-        final Button button_testNotification = findViewById(R.id.button_notification);
+        //final Button button_testNotification = findViewById(R.id.button_notification);
 
         final Intent breaktime_intent = new Intent(this, BreaktimeActivity.class);
         breaktime_intent.putExtra("user", user);
-        breaktime_intent.putExtra("async", asyncCreated);
+        breaktime_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         final Intent perfil_intent = new Intent(this, PerfilActivity.class);
         perfil_intent.putExtra("user", user);
-        perfil_intent.putExtra("async", asyncCreated);
+        perfil_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         final Intent pedir_favor_intent = new Intent(this, PedirFavorActivity.class);
         pedir_favor_intent.putExtra("user", user);
-        pedir_favor_intent.putExtra("async", asyncCreated);
+        pedir_favor_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         final Intent ver_breaktime_favores_intent = new Intent(this, BreaktimesAndFavorsActivity.class);
         ver_breaktime_favores_intent.putExtra("user", user);
-        ver_breaktime_favores_intent.putExtra("async", asyncCreated);
+        ver_breaktime_favores_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         //final Intent motivar_intent = new Intent(this, MotivarActivity.class);
         //final Intent historico_intent = new Intent(this, HistoricoActivity.class);
         final Intent logout_intent = new Intent(this, MainActivity.class);
+        logout_intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         TextView score = (TextView) this.findViewById(R.id.score_text);
         score.setText(res.getString(R.string.score_string) + " " + Integer.toString(user_score));
@@ -128,8 +129,10 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(perfil_intent);
             }
         });
-/*
-        button_testNotification.setOnClickListener(new View.OnClickListener() {
+
+
+        /*button_testNotification.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 NotificationCompat.Builder mBuilder =
@@ -140,6 +143,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 // Creates an explicit intent for an Activity in your app
                 Intent resultIntent = new Intent(view.getContext(), BreaktimeActivity.class);
+                resultIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
                 // The stack builder object will contain an artificial back stack for the started Activity.
                 // This ensures that navigating backward from the Activity leads out of your application to the Home screen.
