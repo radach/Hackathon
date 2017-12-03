@@ -17,8 +17,8 @@ https://www.figma.com/proto/Tk9D44HILgHhvSECAQj5Sdxs/Untitled?scaling=contain&no
 ### Run
 Check IP in files:
 * Server
- * Control.java
- * ControlAux.java
+  * Control.java
+  * ControlAux.java
 * Mobile
- * MqttHelper.java
- * SocketCLient.java
+  * MqttHelper.java
+  * SocketCLient.java
